@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Project Name] | Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #09090b; --bg-surface: #18181b; --text-main: #f4f4f5; 
+            --text-muted: #a1a1aa; --accent: #10b981; --border-color: #27272a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; padding: 4rem 10%; }
+        .mono { font-family: 'Fira Code', monospace; }
+        
+        .back-link { color: var(--accent); text-decoration: none; display: inline-block; margin-bottom: 2rem; font-size: 0.9rem; transition: opacity 0.3s;}
+        .back-link:hover { opacity: 0.8; }
+        
+        .project-container { background-color: var(--bg-surface); padding: 4rem; border-radius: 8px; border: 1px solid var(--border-color); border-top: 3px solid var(--accent); }
+        h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--text-main); letter-spacing: -1px; }
+        
+        .hero-img { width: 100%; max-height: 450px; object-fit: cover; border-radius: 8px; margin-bottom: 2.5rem; border: 1px solid var(--border-color); }
+        
+        .tech-list { display: flex; gap: 1rem; list-style: none; margin-bottom: 3rem; border-bottom: 1px solid var(--border-color); padding-bottom: 2rem;}
+        .tech-list li { font-size: 0.9rem; color: var(--accent); background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.8rem; border-radius: 4px;}
+        
+        .description { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+        
+        h4 { margin-top: 2.5rem; color: var(--text-main); font-size: 1.1rem; margin-bottom: 1rem; }
+        ul.details-list { margin-left: 1.5rem; color: var(--text-muted); }
+        ul.details-list li { margin-bottom: 0.8rem; }
+        
+        @media (max-width: 768px) {
+            body { padding: 2rem 5%; }
+            .project-container { padding: 2rem; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        };
+    </script>
+</head>
+<body>
+
+    <a href="../index.html" class="back-link mono"><- cd .. (Go Back)</a>
+
+    <div class="project-container">
+        
+        <h1>[Insert Project Title Here]</h1>
+        
+        <img src="images/project-banner.jpg" alt="Project Image" class="hero-img" onerror="this.style.display='none'">
+
+        <ul class="tech-list mono">
+            <li>[Tech 1]</li>
+            <li>[Tech 2]</li>
+            <li>[Tech 3]</li>
+        </ul>
+
+        <p class="description">
+            [Write a longer paragraph explaining what this project does, the problem it solves, and why you built it. You can write as much text here as you need.]
+        </p>
+
+        <h4 class="mono">> hardware_or_software_specs</h4>
+        <ul class="details-list">
+            <li>[Detail 1 about implementation, hardware, or stack]</li>
+            <li>[Detail 2]</li>
+            <li>[Detail 3]</li>
+        </ul>
+
+        <h4 class="mono">> logic_highlights</h4>
+        <ul class="details-list">
+            <li><strong>[Feature 1]:</strong> [Explanation of how you built it and why]</li>
+            <li><strong>[Feature 2]:</strong> [Explanation of how you built it and why]</li>
+        </ul>
+        
+        </div>
+
+</body>
+</html>
