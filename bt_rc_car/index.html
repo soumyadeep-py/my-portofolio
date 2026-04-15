@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4WD RC CAR | Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --bg-base: #09090b; --bg-surface: #18181b; --text-main: #f4f4f5; 
+            --text-muted: #a1a1aa; --accent: #10b981; --border-color: #27272a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; padding: 4rem 10%; }
+        .mono { color:var(--text-main); font-family: 'Fira Code', monospace; font-size: 1.5rem;}
+        
+        .back-link { color: var(--accent); text-decoration: none; display: inline-block; margin-bottom: 2rem; font-size: 0.9rem; transition: opacity 0.3s;}
+        .back-link:hover { opacity: 0.8; }
+        
+        .project-container { background-color: var(--bg-surface); padding: 4rem; border-radius: 8px; border: 1px solid var(--border-color); border-top: 3px solid var(--accent); }
+        h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--text-main); letter-spacing: -1px; }
+        
+        .hero-img { width: 100%; max-height: 450px; object-fit: cover; border-radius: 8px; margin-bottom: 2.5rem; border: 1px solid var(--border-color); }
+        
+        .tech-list { display: flex; gap: 1rem; list-style: none; margin-bottom: 3rem; border-bottom: 1px solid var(--border-color); padding-bottom: 2rem;}
+        .tech-list li { font-size: 0.9rem; color: var(--accent); background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.8rem; border-radius: 4px;}
+        
+        .description { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+        
+        h4 { margin-top: 2.5rem; color: var(--text-main); font-size: 1.1rem; margin-bottom: 1rem; }
+        ul.details-list { margin-left: 1.5rem; color: var(--text-muted); }
+        ul.details-list li { margin-bottom: 0.8rem; }
+        
+        .body-text {color:#10b981; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 1.2rem;}
+
+        @media (max-width: 768px) {
+            body { padding: 2rem 5%; }
+            .project-container { padding: 2rem; }
+            h1 { font-size: 2rem; }
+        }
+
+        .ide-window {
+            background-color: #272822;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 100%;
+            margin: 2rem auto; /* Centers it on your page */
+            overflow: hidden;
+        }
+        .ide-header {
+            background-color: #1e1f1c;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+        .file-name {
+            margin: 0 auto;
+            color: #888;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding-right: 56px;
+        }
+        pre[class*="language-"] {
+            margin: 0 !important;
+            border-radius: 0 0 8px 8px !important;
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.9rem;
+            padding: 1.5rem 1.5rem 1.5rem 3.8rem !important;
+            white-space: pre-wrap !important; 
+            word-break: break-word !important;
+        }
+        code[class*="language-"] {
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+        /* --- CUSTOM COPY BUTTON STYLING --- */
+        /* --- UPDATED HEADER STYLES --- */
+        .ide-header {
+            background-color: #1e1f1c;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Spreads items evenly */
+            position: relative;
+        }
+        
+        .mac-buttons {
+            display: flex;
+            gap: 8px;
+            width: 60px; /* Reserves space so title stays centered */
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+        
+        .file-name {
+            color: #888;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            flex-grow: 1; /* Pushes everything else to the edges */
+        }
+
+        /* --- NEW COPY BUTTON STYLES --- */
+        .header-copy-btn {
+            background: transparent;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            width: 60px; /* Matches mac-buttons to keep title perfectly centered */
+        }
+
+        .header-copy-btn:hover {
+            color: #ffffff;
+            background-color: #3e3d32;
+        }
+
+        .header-copy-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        a {
+            color:#10b981
+        }
+    </style>
+    <script>
+    // --- Anti-Inspect Code ---
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    };
+
+    // --- Copy Button Code ---
+    // This wrapper ensures the HTML exists before the script tries to grab it
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            // 1. Grab the text from the code block
+            const codeText = document.querySelector('code').innerText;
+            const btn = this;
+
+            // 2. Write it to the clipboard
+            navigator.clipboard.writeText(codeText).then(() => {
+                
+                // 3. Temporarily change the content to "Copied!" text
+                btn.innerHTML = `<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: bold; color: #27c93f;">Copied!</span>`;
+                
+                // 4. Change it back to the original copy SVG after 2 seconds
+                setTimeout(() => {
+                    btn.innerHTML = `
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>`;
+                }, 2000);
+                
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+                alert("Please ensure you are opening this file securely or allow clipboard permissions.");
+            });
+        });
+        
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        document.getElementById('copyBtn-or').addEventListener('click', function() {
+            // 1. Grab the text from the code block
+            const codeText = document.querySelector('code').innerText;
+            const btn = this;
+
+            // 2. Write it to the clipboard
+            navigator.clipboard.writeText(codeText).then(() => {
+                
+                // 3. Temporarily change the content to "Copied!" text
+                btn.innerHTML = `<span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: bold; color: #27c93f;">Copied!</span>`;
+                
+                // 4. Change it back to the original copy SVG after 2 seconds
+                setTimeout(() => {
+                    btn.innerHTML = `
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>`;
+                }, 2000);
+                
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+                alert("Please ensure you are opening this file securely or allow clipboard permissions.");
+            });
+        });
+        
+    });
+    </script>
+    
+</head>
+<body>
+
+    <a href="../index.html" class="back-link mono"><- cd .. (Go Back)</a>
+
+    <div class="project-container">
+        
+        <h1>4WD RC CAR</h1>
+
+        <img src="images/project-banner.jpg" alt="Project Image" class="hero-img" onerror="this.style.display='none'">
+
+        <ul class="tech-list mono">
+            <li>//Arduino Uno R3</li>
+            <li>//C++</li>
+            <li>//HC-05 BT Module</li>
+            <li>//Rechargable Battery System</li>
+        </ul>
+
+        <p class="description">
+            This project was made by me to understand the working of the most common microcontroller, Arduino Uno R3. From ATL labs of School to Colleges, I have seen using the UNO R3 for teaching the basics of a microcontroller after teachig about breadboards, LEDs, Resistors, and various Modules. This project might look simple, to simply drive a car but the twist in the project is that I have used JOYSTICK controls and also lights which work by code, not just connected to battery :) <br>
+            The complicated part of this project is managing the joystick controls and logical lighting system. Hope you enjoy reading this project file and hope wish to make one ^_^
+        </p>
+
+        <h4 class="mono">> hardware_used()</h4>        
+        <p class="body-text">
+            <div style="color:#10b981; font-size: 1.5rem;">
+                <b>1. Arduino UNO R3 </b>
+                <img src='arduino uno r3.jpg' width="100%">
+                <div style="color:white; font-size: 1.2rem;">
+                    Well, this is the original Arduino UNO R3 but you do not necessarily need to buy an original one if you are a beginner. Check out this on 
+                    <a href='https://amzn.in/d/09iAWEV4' target="_blank">Amazon</a>. 
+                    You may go with any working third party model. Just check for reviews ;)
+                </div>
+                <div style="color:white; font-size: 1.2rem;">
+                    I will be using the 
+                    <b><span style='color:#10b981'>Original Arduino UNO R3</span></b> :) 
+                    <br>which looks like this,
+                </div>
+                <img src="">
+                <div style="color:white; font-size: 1.2rem;">
+                    No need to be suprised. It is an old one of 2022. Functioning is all same but the looks are different :)
+                </div>
+            </div>
+
+            <br><br>
+
+            <div style="color:#10b981; font-size: 1.5rem;">
+                <b>2. Motor Shield for Arduino UNO R3</b>
+                <img src="motor shield.jpg" width="100%"> 
+                <div style="color:white; font-size: 1.2rem;">
+                    This is something which you have to buy from third party sources as this is not made by Arduino. You may check out a suitable one on
+                    <a href="https://amzn.in/d/0bA4PYzR" target="_blank">Amazon</a>.
+                    I am using this from
+                    <a href="https://quartzcomponents.com/products/l293d-motor-shield-for-arduino" target="_blank">Quartz Components</a>.
+                </div>
+            </div>
+
+            <br><br>
+
+            <div style="color:#10b981; font-size: 1.5rem;">
+                <b>3. HC-05 Bluetooth Module</b>
+                <img src="hc-05.jpg" width="100%">
+                <div style="color:white; font-size: 1.2rem;">
+                    This is something which you have to buy from third party sources as this is not made by Arduino. You may check out a suitable one on Amazon
+                    <a href="https://amzn.in/d/09eSMHM6" target="_blank">like this</a>.
+                    I am using this from
+                    <a href="https://quartzcomponents.com/products/hc-05-bluetooth-module" style="color:#10b981" target="_blank">Quartz Components</a>.
+                </div>
+            </div>
+
+            <br><br>
+
+            <div style="color:#10b981; font-size: 1.5rem;">
+                <b>4. A suitable chasis</b>
+                <div style="color:white; font-size: 1.2rem;">
+                    This is something on which you will put all your electronics. I am using one from
+                    <a href="https://amzn.in/d/0fhUT4om" target="_blank">Amazon</a>.
+                </div>
+            </div>
+
+            <br><br>
+
+            <div style="color:#10b981; font-size: 1.5rem;">
+                <b>5. LED Lights</b>
+                <img src="led.jpg" width="100%">
+                <div style="color:white; font-size: 1.2rem;">
+                    I am using four
+                    <a href="https://quartzcomponents.com/products/8mm-warm-white-color-led-diamond-shape-led" target="_blank">8mm warm white color LED</a>, four
+                    <a href='https://quartzcomponents.com/products/5mm-rectangle-2-pin-through-hole-flat-top-diffused-led-yellow' style="color:#10b981" target="_blank">5mm yellow LED</a> and two
+                    <a href="https://quartzcomponents.com/products/5mm-rectangular-flat-top-led-red"  target="_blank">5mm red LED</a>.
+                </div>
+            </div>
+
+            <br><br>
+
+            <div style="color:#10b981; font-size: 1.5rem;">
+                <b>6. Batteries</b>
+                <img src="battery.jpg" width="100%">
+                <div style="color:white; font-size: 1.2rem;">
+                    I am using the most commonly used 
+                    <a href='https://quartzcomponents.com/products/18650-li-ion-2600mah-rechargeable-battery-hongli' target="_blank">18650 Lithium-ion Batteries</a>
+                    with a 
+                    <a href="https://quartzcomponents.com/products/double-cell-18650-li-ion-battery-holder" target="_blank">battery holder</a>.
+                </div>
+            </div>
+
+            <br><br>
+
+            <div style="color:#10b981; font-size: 1.5rem;">
+                <b>7. Charging Module for Li-ion Batteries</b>
+                <div style="color:white; font-size: 1.2rem;">
+                    I am not using the commonly used TP4056 Charging Module which is enough to charge a single Li-ion battery like the one I have used, but I will be using two such in series. So, I ordered from Amazon a
+                    <a href='https://amzn.in/d/08x4mUJF' target="_blank"><b>Step-Up</b> booster charging module</a> that boost the 5V to 8.4V, which is the optimum volatge for charging two li-ion batteries in series. Also, I will be using this
+                    <a href='https://amzn.in/d/08lhJhzd' target="_blank">BMS</a> from Amazon, to make sure that both the batteries are charged at their maximum voltage which is 8.4V. The BMS I am using is of 20 amperes. You may definitely choose a lower ampere one. It is recommended to add a BMS for longer life of batteries.
+                </div>
+            </div>
+
+            <br><br>
+
+            <div style="color:#10b981; font-size: 1.5rem;">
+                <b>8. Passive Buzzer with 3 pin</b>
+                <div style="color:white; font-size: 1.2rem;">
+                    A silent car is too boring!! Don't you agree? :)<br>
+                    For various events, I am using this 
+                    <a href='https://quartzcomponents.com/products/passive-buzzer-module' target="_blank">passive buzzer</a> that can generate tone from 1.5 ~ 2.5 kHz.
+                </div>
+            </div>
+        </p>    
+
+        <h4 class="mono">> circuit_diagram()</h4>
+        <div style="color:#10b981; font-size: 1.5rem;">
+            <b>1. Arduino UNO R3 </b><img src='' width="100%">
+        </div>
+
+        <h4 class="mono">> coding()</h4>
+        <p>
+            This code also contains parts of code that also print output in serial monitor when the Arduino is connected to laptop and Serial Monitor of Arduino IDE is opened. You can use this code to ensure that your HC-05 module is connected perfectly synced with Arduino. You may also connect LEDs to check whether the LEDS are working or not. You may also motor shield to check whether the motor shield is working or not by seeing the indicator light.
+            <span style="color:red"><br>
+                Do not forget to remove the Power Jumper from motor shield. It is small cap like (usually yellow in color) often near the external power screw terminals. This damage your Arduino.
+                <br>Do not connect the Arduino to laptop when the motors are connected to the motor shield. This may damage your laptop's USB port as motors may draw a large amount of current which the USB port might not be able to handle.
+            </span>
+        </p>
+        <div class="ide-header"> 
+            <div class="mac-buttons">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            </div>
+            <div class="file-name">bt_rc_car_debug.ino</div>
+            <button class="header-copy-btn" id="copyBtn" title="Copy Code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            </button>
+        </div>
+        <pre class="line-numbers"><code class="language-cpp">#include &lt;AFMotor.h&gt; 
+#include &lt;SoftwareSerial.h&gt; 
+
+// --- BLUETOOTH SETUP ---
+// RX is A3 (Connects to HC-05 TX)
+// TX is A4 (Connects to HC-05 RX)
+SoftwareSerial BT(A3, A4); 
+
+// --- PIN DEFINITIONS & 4WD MOTORS ---
+AF_DCMotor motorLeftFront(1);  // M1 block
+AF_DCMotor motorLeftRear(2);   // M2 block
+AF_DCMotor motorRightFront(3); // M3 block
+AF_DCMotor motorRightRear(4);  // M4 block
+
+#define HL_PIN 9       // Headlight (PWM - Servo 1 Pin)
+#define TL_PIN 10      // Taillight (PWM - Servo 2 Pin)
+#define IND_L A0       // Indicator Left 
+#define IND_R A1       // Indicator Right 
+#define BUZZER_PIN A2  // Passive Buzzer 
+#define BT_STATE_PIN 2 // HC-05 State Pin 
+#define STATUS_LED 13  // Uno Built-in LED
+
+// --- STATE VARIABLES ---
+bool headlightU = false;
+bool taillightV = false;
+bool parkingLightOn = false;
+bool hazardLightOn = false;
+bool indicatorL = false;
+bool indicatorR = false;
+bool wasConnected = false;
+
+unsigned long hornTimer = 0;
+unsigned long specialZTimer = 0;
+unsigned long parkingLockBeepEnd = 0;
+
+void setup() {
+Serial.begin(9600); 
+BT.begin(9600);     
+
+Serial.println("=================================");
+Serial.println("  4WD RC CAR SYSTEM BOOTING...   ");
+Serial.println("=================================");
+
+// Initialize all 4 Motors to stopped
+motorLeftFront.setSpeed(0); motorLeftFront.run(RELEASE);
+motorLeftRear.setSpeed(0);  motorLeftRear.run(RELEASE);
+motorRightFront.setSpeed(0); motorRightFront.run(RELEASE);
+motorRightRear.setSpeed(0);  motorRightRear.run(RELEASE);
+
+pinMode(HL_PIN, OUTPUT); pinMode(TL_PIN, OUTPUT);
+pinMode(IND_L, OUTPUT); pinMode(IND_R, OUTPUT);
+pinMode(BUZZER_PIN, OUTPUT);
+pinMode(STATUS_LED, OUTPUT);
+pinMode(BT_STATE_PIN, INPUT);
+
+// Startup Beep
+tone(BUZZER_PIN, 1500, 200); delay(250); 
+tone(BUZZER_PIN, 2000, 300); delay(300);
+
+Serial.println("[SYSTEM] Ready! Waiting for Bluetooth connection...");
+}
+
+void loop() {
+readBluetooth();
+updateLights();
+updateBuzzer();
+updateStatusLed();
+}
+
+// --- BLUETOOTH PARSING ---
+void readBluetooth() {
+if (BT.available()) {
+    String cmd = BT.readStringUntil('\n');
+    cmd.trim(); 
+    
+    if (cmd.length() == 0) return;
+
+    Serial.print("[BT RX] Raw Command Received: '");
+    Serial.print(cmd);
+    Serial.println("'");
+
+    // Dynamic Joystick Parsing
+    char dirY = cmd[0];
+    if (dirY == 'F' || dirY == 'B') {
+    int xIndex = cmd.indexOf('L');
+    if (xIndex == -1) xIndex = cmd.indexOf('R');
+
+    if (xIndex &gt; 0) { 
+        if (parkingLightOn) {
+        Serial.println("[WARNING] Movement ignored: Parking Brake is ON!");
+        parkingLockBeepEnd = millis() + 3000;
+        stopMotors();
+        return;
+        }
+
+        int spdY = cmd.substring(1, xIndex).toInt();
+        char dirX = cmd[xIndex];
+        int spdX = cmd.substring(xIndex + 1).toInt();
+
+        int y = constrain(spdY, 0, 255);
+        int x = constrain(spdX, 0, 255);
+        
+        if (dirY == 'B') y = -y;
+        if (dirX == 'L') x = -x;
+
+        int leftSpeed = y + x;
+        int rightSpeed = y - x;
+        
+        Serial.print("   -&gt; Motor Cmd | Left Side: ");
+        Serial.print(leftSpeed);
+        Serial.print(" | Right Side: ");
+        Serial.println(rightSpeed);
+
+        setMotors(leftSpeed, rightSpeed);
+        return; 
+    }
+    }
+
+    // Single Character Commands
+    char c = cmd[0];
+    switch (c) {
+    case 'F': case 'B': case 'L': case 'R':
+        if (parkingLightOn) {
+        Serial.println("[WARNING] Movement ignored: Parking Brake is ON!");
+        parkingLockBeepEnd = millis() + 3000;
+        stopMotors();
+        break;
+        }
+        if (c == 'F') { setMotors(255, 255); Serial.println("   -&gt; Driving: FORWARD"); }
+        if (c == 'B') { setMotors(-255, -255); Serial.println("   -&gt; Driving: BACKWARD"); }
+        if (c == 'L') { setMotors(-255, 255); Serial.println("   -&gt; Driving: LEFT"); }
+        if (c == 'R') { setMotors(255, -255); Serial.println("   -&gt; Driving: RIGHT"); }
+        break;
+    case 'S': stopMotors(); Serial.println("   -&gt; Status: STOPPED"); break;
+    case 'U': headlightU = true; Serial.println("   -&gt; Lights: Headlights ON"); break;
+    case 'u': headlightU = false; Serial.println("   -&gt; Lights: Headlights OFF"); break;
+    case 'V': taillightV = true; Serial.println("   -&gt; Lights: Taillights ON"); break;
+    case 'v': taillightV = false; Serial.println("   -&gt; Lights: Taillights OFF"); break;
+    case 'W': parkingLightOn = true; stopMotors(); Serial.println("   -&gt; State: PARKING BRAKE ENGAGED"); break;
+    case 'w': parkingLightOn = false; Serial.println("   -&gt; State: PARKING BRAKE RELEASED"); break;
+    case 'X': hazardLightOn = true; indicatorL = false; indicatorR = false; Serial.println("   -&gt; Lights: HAZARDS ON"); break;
+    case 'x': hazardLightOn = false; Serial.println("   -&gt; Lights: HAZARDS OFF"); break;
+    case '1': indicatorL = true; Serial.println("   -&gt; Lights: Left Indicator ON"); break;
+    case '2': indicatorL = false; Serial.println("   -&gt; Lights: Left Indicator OFF"); break;
+    case '4': indicatorR = true; Serial.println("   -&gt; Lights: Right Indicator ON"); break;
+    case '3': indicatorR = false; Serial.println("   -&gt; Lights: Right Indicator OFF"); break;
+    case 'Y': hornTimer = millis(); Serial.println("   -&gt; Action: HORN"); break;       
+    case 'Z': specialZTimer = millis(); Serial.println("   -&gt; Action: SPECIAL HIGH-BEAM FLASH"); break;   
+    default: Serial.println("   -&gt; [ERROR] Unknown Command!"); break;
+    }
+}
+}
+
+// --- LIGHTING LOGIC ---
+void updateLights() {
+int hl = 0; 
+int tl = 0; 
+bool blinkState = (millis() % 1000) &lt; 500; 
+bool indLeftOut = false;
+bool indRightOut = false;
+
+if (headlightU) { hl = 230; tl = 50; }
+if (taillightV) { hl = 230; tl = 255; }
+
+if (parkingLightOn) {
+    hl = 128; tl = 128; 
+    if (blinkState) { indLeftOut = true; indRightOut = true; }
+}
+
+if (hazardLightOn) {
+    unsigned long t = millis() % 1900; 
+    if (t &lt; 100 || (t &gt;= 200 && t &lt; 300) || (t &gt;= 400 && t &lt; 500)) { hl = 255; } 
+    else { hl = 0; }
+    if (blinkState) { indLeftOut = true; indRightOut = true; }
+} else {
+    if (indicatorL && blinkState) indLeftOut = true;
+    if (indicatorR && blinkState) indRightOut = true;
+}
+
+if (millis() - specialZTimer &lt; 300) { hl = 255; }
+
+analogWrite(HL_PIN, hl);
+analogWrite(TL_PIN, tl);
+digitalWrite(IND_L, indLeftOut ? HIGH : LOW);
+digitalWrite(IND_R, indRightOut ? HIGH : LOW);
+}
+
+// --- BUZZER LOGIC ---
+void updateBuzzer() {
+bool isConnected = digitalRead(BT_STATE_PIN);
+
+if (isConnected && !wasConnected) {
+    Serial.println("\n[SYSTEM] *** BLUETOOTH DEVICE CONNECTED! ***\n");
+    tone(BUZZER_PIN, 1800, 150); delay(150);
+    tone(BUZZER_PIN, 2500, 250); delay(250);
+} else if (!isConnected && wasConnected) {
+    Serial.println("\n[SYSTEM] *** BLUETOOTH DEVICE DISCONNECTED! ***\n");
+}
+wasConnected = isConnected;
+
+if (millis() - hornTimer &lt; 300) {
+    tone(BUZZER_PIN, 3000); 
+} else if (millis() &lt; parkingLockBeepEnd) {
+    tone(BUZZER_PIN, 800);
+} else if (!isConnected) {
+    if (millis() % 1000 &lt; 100) { tone(BUZZER_PIN, 1000); } 
+    else { noTone(BUZZER_PIN); }
+} else {
+    noTone(BUZZER_PIN);
+}
+}
+
+// --- STATUS LED LOGIC ---
+void updateStatusLed() {
+unsigned long t = millis() % 2500;
+if (t &lt; 100 || (t &gt;= 200 && t &lt; 300) || (t &gt;= 400 && t &lt; 500)) { digitalWrite(STATUS_LED, HIGH); } 
+else { digitalWrite(STATUS_LED, LOW); }
+}
+
+// --- 4WD SHIELD MOTOR CONTROL ---
+void setMotors(int left, int right) {
+left = constrain(left, -255, 255);
+right = constrain(right, -255, 255);
+
+// --- DRIVE LEFT SIDE (M1 & M2) ---
+if (left &gt; 0) { 
+    motorLeftFront.setSpeed(left); motorLeftFront.run(FORWARD); 
+    motorLeftRear.setSpeed(left);  motorLeftRear.run(FORWARD);
+} 
+else if (left &lt; 0) { 
+    motorLeftFront.setSpeed(-left); motorLeftFront.run(BACKWARD); 
+    motorLeftRear.setSpeed(-left);  motorLeftRear.run(BACKWARD);
+} 
+else { 
+    motorLeftFront.setSpeed(0); motorLeftFront.run(RELEASE); 
+    motorLeftRear.setSpeed(0);  motorLeftRear.run(RELEASE);
+}
+
+// --- DRIVE RIGHT SIDE (M3 & M4) ---
+if (right &gt; 0) { 
+    motorRightFront.setSpeed(right); motorRightFront.run(FORWARD); 
+    motorRightRear.setSpeed(right);  motorRightRear.run(FORWARD);
+} 
+else if (right &lt; 0) { 
+    motorRightFront.setSpeed(-right); motorRightFront.run(BACKWARD); 
+    motorRightRear.setSpeed(-right);  motorRightRear.run(BACKWARD);
+} 
+else { 
+    motorRightFront.setSpeed(0); motorRightFront.run(RELEASE); 
+    motorRightRear.setSpeed(0);  motorRightRear.run(RELEASE);
+}
+}
+
+void stopMotors() {
+motorLeftFront.setSpeed(0); motorLeftFront.run(RELEASE);
+motorLeftRear.setSpeed(0);  motorLeftRear.run(RELEASE);
+motorRightFront.setSpeed(0); motorRightFront.run(RELEASE);
+motorRightRear.setSpeed(0);  motorRightRear.run(RELEASE);
+}       </code>
+        </pre>
+        
+        <br>
+        <p>
+            You may use this code for your model to work. It is 
+            <span style="color: #10b981;">highly recommended</span>
+             to use this code as it uses less ram, variables and storage.
+            <span style="color:red"><br>
+                Connect the RX of HC-05 to D1 of Arduino.
+                <br>Connect the TX of HC-05 to D0 of Arduino.
+            </span>
+        </p>
+        <div class="ide-header"> 
+            <div class="mac-buttons">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            </div>
+            <div class="file-name">bt_rc_car.ino</div>
+            <button class="header-copy-btn" id="copyBtn-or" title="Copy Code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            </button>
+        </div>
+        <pre class="line-numbers"><code class="language-cpp">#include &lt;AFMotor.h&gt; 
+
+// --- PIN DEFINITIONS & 4WD MOTORS ---
+AF_DCMotor motorLeftFront(1);  // M1 block
+AF_DCMotor motorLeftRear(2);   // M2 block
+AF_DCMotor motorRightFront(3); // M3 block
+AF_DCMotor motorRightRear(4);  // M4 block
+
+#define HL_PIN 9       // Headlight (PWM - Servo 1 Pin)
+#define TL_PIN 10      // Taillight (PWM - Servo 2 Pin)
+#define IND_L A0       // Indicator Left 
+#define IND_R A1       // Indicator Right 
+#define BUZZER_PIN A2  // Passive Buzzer 
+#define BT_STATE_PIN 2 // HC-05 State Pin 
+#define STATUS_LED 13  // Uno Built-in LED
+
+// --- STATE VARIABLES ---
+bool headlightU = false;
+bool taillightV = false;
+bool parkingLightOn = false;
+bool hazardLightOn = false;
+bool indicatorL = false;
+bool indicatorR = false;
+bool wasConnected = false;
+
+unsigned long hornTimer = 0;
+unsigned long specialZTimer = 0;
+unsigned long parkingLockBeepEnd = 0;
+
+void setup() {
+  // Starts the Hardware Serial strictly for HC-05 Bluetooth communication
+  Serial.begin(9600); 
+
+  // Initialize all 4 Motors to stopped
+  motorLeftFront.setSpeed(0); motorLeftFront.run(RELEASE);
+  motorLeftRear.setSpeed(0);  motorLeftRear.run(RELEASE);
+  motorRightFront.setSpeed(0); motorRightFront.run(RELEASE);
+  motorRightRear.setSpeed(0);  motorRightRear.run(RELEASE);
+  
+  pinMode(HL_PIN, OUTPUT); pinMode(TL_PIN, OUTPUT);
+  pinMode(IND_L, OUTPUT); pinMode(IND_R, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(STATUS_LED, OUTPUT);
+  pinMode(BT_STATE_PIN, INPUT);
+
+  // Startup Beep
+  tone(BUZZER_PIN, 1500, 200); delay(250); 
+  tone(BUZZER_PIN, 2000, 300); delay(300);
+}
+
+void loop() {
+  readBluetooth();
+  updateLights();
+  updateBuzzer();
+  updateStatusLed();
+}
+
+// --- BLUETOOTH PARSING ---
+void readBluetooth() {
+  if (Serial.available()) {
+    String cmd = Serial.readStringUntil('\n');
+    cmd.trim(); 
+    
+    if (cmd.length() == 0) return;
+
+    // Dynamic Joystick Parsing
+    char dirY = cmd[0];
+    if (dirY == 'F' || dirY == 'B') {
+      int xIndex = cmd.indexOf('L');
+      if (xIndex == -1) xIndex = cmd.indexOf('R');
+
+      if (xIndex &gt; 0) { 
+        if (parkingLightOn) {
+          parkingLockBeepEnd = millis() + 3000;
+          stopMotors();
+          return;
+        }
+
+        int spdY = cmd.substring(1, xIndex).toInt();
+        char dirX = cmd[xIndex];
+        int spdX = cmd.substring(xIndex + 1).toInt();
+
+        int y = constrain(spdY, 0, 255);
+        int x = constrain(spdX, 0, 255);
+        
+        if (dirY == 'B') y = -y;
+        if (dirX == 'L') x = -x;
+
+        int leftSpeed = y + x;
+        int rightSpeed = y - x;
+
+        setMotors(leftSpeed, rightSpeed);
+        return; 
+      }
+    }
+
+    // Single Character Commands
+    char c = cmd[0];
+    switch (c) {
+      case 'F': case 'B': case 'L': case 'R':
+        if (parkingLightOn) {
+          parkingLockBeepEnd = millis() + 3000;
+          stopMotors();
+          break;
+        }
+        if (c == 'F') setMotors(255, 255);
+        if (c == 'B') setMotors(-255, -255);
+        if (c == 'L') setMotors(-255, 255);
+        if (c == 'R') setMotors(255, -255);
+        break;
+      case 'S': stopMotors(); break;
+      case 'U': headlightU = true; break;
+      case 'u': headlightU = false; break;
+      case 'V': taillightV = true; break;
+      case 'v': taillightV = false; break;
+      case 'W': parkingLightOn = true; stopMotors(); break;
+      case 'w': parkingLightOn = false; break;
+      case 'X': hazardLightOn = true; indicatorL = false; indicatorR = false; break;
+      case 'x': hazardLightOn = false; indicatorL = false; indicatorR = false; break;
+      case '1': indicatorL = true; break;
+      case '2': indicatorL = false; break;
+      case '4': indicatorR = true; break;
+      case '3': indicatorR = false; break;
+      case 'Y': hornTimer = millis(); break;       
+      case 'Z': specialZTimer = millis(); break;   
+    }
+  }
+}
+
+// --- LIGHTING LOGIC ---
+void updateLights() {
+  int hl = 0; 
+  int tl = 0; 
+  bool blinkState = (millis() % 1000) &lt; 500; 
+  bool indLeftOut = false;
+  bool indRightOut = false;
+
+  if (headlightU) { hl = 255; tl = 50; }
+  if (taillightV) { hl = 255; tl = 255; }
+  
+  if (parkingLightOn) {
+    hl = 128; tl = 128; 
+    if (blinkState) { indLeftOut = true; indRightOut = true; }
+  }
+
+  if (hazardLightOn) {
+    unsigned long t = millis() % 1900; 
+    if (t &lt; 100 || (t &gt;= 200 &amp;&amp; t &lt; 300) || (t &gt;= 400 &amp;&amp; t &lt; 500)) { hl = 255; } 
+    else { hl = 0; }
+    if (blinkState) { indLeftOut = true; indRightOut = true; }
+  } else {
+    if (indicatorL &amp;&amp; blinkState) indLeftOut = true;
+    if (indicatorR &amp;&amp; blinkState) indRightOut = true;
+  }
+
+  if (millis() - specialZTimer &lt; 300) { hl = 255; }
+
+  analogWrite(HL_PIN, hl);
+  analogWrite(TL_PIN, tl);
+  digitalWrite(IND_L, indLeftOut ? HIGH : LOW);
+  digitalWrite(IND_R, indRightOut ? HIGH : LOW);
+}
+
+// --- BUZZER LOGIC ---
+void updateBuzzer() {
+  bool isConnected = digitalRead(BT_STATE_PIN);
+
+  if (isConnected &amp;&amp; !wasConnected) {
+    tone(BUZZER_PIN, 1800, 150); delay(150);
+    tone(BUZZER_PIN, 2500, 250); delay(250);
+  } 
+  wasConnected = isConnected;
+
+  if (millis() - hornTimer &lt; 300) {
+    tone(BUZZER_PIN, 3000); 
+  } else if (millis() &lt; parkingLockBeepEnd) {
+    tone(BUZZER_PIN, 800);
+  } else if (!isConnected) {
+    if (millis() % 1000 &lt; 100) { tone(BUZZER_PIN, 1000); } 
+    else { noTone(BUZZER_PIN); }
+  } else {
+    noTone(BUZZER_PIN);
+  }
+}
+
+// --- STATUS LED LOGIC ---
+void updateStatusLed() {
+  unsigned long t = millis() % 1100;
+  if (t &lt; 100 || (t &gt;= 200 &amp;&amp; t &lt; 300) || (t &gt;= 400 &amp;&amp; t &lt; 500)) { digitalWrite(STATUS_LED, HIGH); } 
+  else { digitalWrite(STATUS_LED, LOW); }
+}
+
+// --- 4WD SHIELD MOTOR CONTROL ---
+void setMotors(int left, int right) {
+  left = constrain(left, -255, 255);
+  right = constrain(right, -255, 255);
+
+  // --- DRIVE LEFT SIDE (M1 &amp; M2) ---
+  if (left &gt; 0) { 
+    motorLeftFront.setSpeed(left); motorLeftFront.run(FORWARD); 
+    motorLeftRear.setSpeed(left);  motorLeftRear.run(FORWARD);
+  } 
+  else if (left &lt; 0) { 
+    motorLeftFront.setSpeed(-left); motorLeftFront.run(BACKWARD); 
+    motorLeftRear.setSpeed(-left);  motorLeftRear.run(BACKWARD);
+  } 
+  else { 
+    motorLeftFront.setSpeed(0); motorLeftFront.run(RELEASE); 
+    motorLeftRear.setSpeed(0);  motorLeftRear.run(RELEASE);
+  }
+
+  // --- DRIVE RIGHT SIDE (M3 &amp; M4) ---
+  if (right &gt; 0) { 
+    motorRightFront.setSpeed(right); motorRightFront.run(FORWARD); 
+    motorRightRear.setSpeed(right);  motorRightRear.run(FORWARD);
+  } 
+  else if (right &lt; 0) { 
+    motorRightFront.setSpeed(-right); motorRightFront.run(BACKWARD); 
+    motorRightRear.setSpeed(-right);  motorRightRear.run(BACKWARD);
+  } 
+  else { 
+    motorRightFront.setSpeed(0); motorRightFront.run(RELEASE); 
+    motorRightRear.setSpeed(0);  motorRightRear.run(RELEASE);
+  }
+}
+
+void stopMotors() {
+  motorLeftFront.setSpeed(0); motorLeftFront.run(RELEASE);
+  motorLeftRear.setSpeed(0);  motorLeftRear.run(RELEASE);
+  motorRightFront.setSpeed(0); motorRightFront.run(RELEASE);
+  motorRightRear.setSpeed(0);  motorRightRear.run(RELEASE);
+}
+        </code>
+        </pre>
+        </div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+</body>
+</html>

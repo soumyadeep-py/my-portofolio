@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python | Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #09090b; --bg-surface: #18181b; --text-main: #f4f4f5; 
+            --text-muted: #a1a1aa; --accent: #10b981; --border-color: #27272a;
+            --accent-dim: rgba(16, 185, 129, 0.1);
+        }
+        
+        /* Global Scroll Lock */
+        html, body { max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; }
+        
+        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; padding: 4rem 10%; }
+        .mono { font-family: 'Fira Code', monospace; }
+        
+        .back-link { color: var(--accent); text-decoration: none; display: inline-block; margin-bottom: 2rem; font-size: 0.9rem; transition: opacity 0.3s;}
+        .back-link:hover { opacity: 0.8; }
+        
+        .project-container { background-color: var(--bg-surface); padding: 4rem; border-radius: 8px; border: 1px solid var(--border-color); border-top: 3px solid var(--accent); }
+        h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--text-main); letter-spacing: -1px; }
+        
+        .hero-img { width: 100%; max-height: 450px; object-fit: cover; border-radius: 8px; margin-bottom: 2.5rem; border: 1px solid var(--border-color); }
+        
+        .tech-list { display: flex; gap: 1rem; list-style: none; margin-bottom: 3rem; border-bottom: 1px solid var(--border-color); padding-bottom: 2rem;}
+        .tech-list li { font-size: 0.9rem; color: var(--accent); background: var(--accent-dim); padding: 0.2rem 0.8rem; border-radius: 4px;}
+        
+        .description { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+        
+        h4 { margin-top: 2.5rem; color: var(--text-main); font-size: 1.1rem; margin-bottom: 1rem; }
+        
+        /* Table Style & Horizontal Control */
+        .table-scroll { width: 100%; overflow-x: auto; margin-top: 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; background: rgba(0,0,0,0.2); }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 500px; /* Ensures table doesn't squish too much */ }
+        th { padding: 1rem; background: rgba(16, 185, 129, 0.05); color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border-color); }
+        td { padding: 1rem; color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+        tbody tr:hover { background: rgba(39, 39, 42, 0.4); }
+        .table-mono { font-family: 'Fira Code', monospace; color: var(--accent); font-size: 0.8rem; }
+        .status-badge { padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; border: 1px solid var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+        @media (max-width: 768px) {
+            body { padding: 2rem 5%; }
+            .project-container { padding: 2rem; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../index.html" class="back-link mono"><- cd .. (Go Back)</a>
+
+    <div class="project-container">
+        <h1>Python Projects</h1>
+        
+        <img src="images/project-banner.jpg" alt="Project Image" class="hero-img" onerror="this.style.display='none'">
+
+        <ul class="tech-list mono">
+            <li>//Python 3.x</li>
+            <li>//Automation</li>
+            <li>//Data_Management</li>
+        </ul>
+
+        <p class="description">
+            Python has become a very popular choice in today's world. Although it is a high-level programming language, it is used extensively in AI and Machine Learning. I have gathered knowledge through my higher secondary curriculum and independent study to build a list of programs spanning from basic logic to advanced integrations.
+        </p>
+
+        <h4 class="mono">> software_need()</h4>
+        <p>
+            You only need the Python interpreter installed from 
+            <a style="color:#10b981; text-decoration: none;" href="https://www.python.org/downloads/" target="_blank">python.org</a>. 
+            It is a straightforward setup for any environment.
+        </p>
+
+        <h4 class="mono">> list_of_programs()</h4>
+        
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr class="mono">
+                        <th># ID</th>
+                        <th>Program Description</th>
+                        <th>Concept</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="table-mono">001</td>
+                        <td>Basic Calculator</td>
+                        <td class="table-mono">//Backend</td>
+                        <td><span class="status-badge">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-mono">02</td>
+                        <td>CSV File Data Sanitizer</td>
+                        <td class="table-mono">//File_IO</td>
+                        <td><span class="status-badge">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-mono">03</td>
+                        <td>Recursive Search Algorithms</td>
+                        <td class="table-mono">//Logic</td>
+                        <td><span class="status-badge">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-mono">04</td>
+                        <td>Arduino Serial Communication Utility</td>
+                        <td class="table-mono">//Hardware</td>
+                        <td><span style="color: var(--text-muted); font-size: 0.8rem;">[In Progress]</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false;
+            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false;
+            if(e.ctrlKey && e.keyCode == 85) return false;
+        };
+    </script>
+</body>
+</html>
